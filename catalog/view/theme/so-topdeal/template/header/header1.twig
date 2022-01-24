@@ -1,0 +1,76 @@
+{#=====Get variable : Config Select Block on header=====#}
+{% set hidden_headertop = soconfig.get_settings('toppanel_type') =='1' or soconfig.get_settings('toppanel_type') =='2'? 'hidden-compact' : '' %}
+{% set hidden_headercenter = soconfig.get_settings('toppanel_type') =='2'? 'hidden-compact' : '' %}
+{% set hidden_headerbottom = soconfig.get_settings('toppanel_type') =='1'? 'hidden-compact' : '' %}
+
+<header id="header" class=" variant typeheader-{{ typeheader ? typeheader : '1'}}">
+	{#======	HEADER promotion	=======#}  
+	{% if soconfig.get_settings('promotion_status') and soconfig.get_settings('promotion') %}
+	<div class="header-promotion {{hidden_headertop}}" >
+		{{ soconfig.decode_entities( soconfig.get_settings('promotion') ) }}
+	</div>
+	{% endif %}
+	{#======	HEADER TOP	=======#}  
+	<div class="header-top {{hidden_headertop}}">
+		<div class="container">
+			<div class="row">
+				
+				<div class="col-lg-3 col-xs-6 header-logo ">
+					<div class="navbar-logo">
+					    {{soconfig.get_logo()}}
+					</div>
+				</div>
+				<div class="col-lg-7 header-sevices">
+					{% if header_block %}
+					{{ header_block }} 
+					{% endif %}
+				</div>
+				<div class="col-lg-2 col-xs-6 header-cart">
+					<div class="shopping_cart">
+					 	{{ cart }} 
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- HEADER CENTER -->
+	<div class="header-center {{hidden_headercenter}}">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-8 col-md-8 col-sm-1 col-xs-3 header-menu ">
+					<div class="megamenu-style-dev megamenu-dev">
+						{{ content_menu }}
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-4 col-sm-11 col-xs-9 header-search">
+					{{ search_block }}
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="header-form {{hidden_headerbottom}}">
+		<div class="button-header current">
+			<i class="fa fa-bars"></i>
+		</div>
+		<div class="dropdown-form toogle_content">
+			{% if soconfig.get_settings('lang_status') %}
+				{{ language }} 
+				{{ currency }} 
+			{% endif %} 
+
+			
+			<span class="text">{{ text_more }}</span>
+			<ul class="dropdown-menu">
+	            <li class="wishlist"><a href="{{ wishlist }}" id="wishlist-total" class="top-link-wishlist" title="{{ text_wishlist }} "><span>{{ text_wishlist }} </span></a></li>
+	            <li class="checkout"><a href="{{ checkout }}" class="top-link-checkout" title="{{ text_checkout }}"><span >{{ text_checkout }}</span></a></li>
+	         </ul>
+		</div>
+		<div class="button-user">
+		    <div class="user-info asd">
+	            <a class="link-lg" href="{{ login }}">{{ text_login }}</a>
+            </div>
+		</div>
+	</div>
+	
+</header>
