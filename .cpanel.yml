@@ -1,0 +1,5 @@
+---
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home/eandmng/public_html/commerce/
+    - /bin/cp -R * $DEPLOYPATH
